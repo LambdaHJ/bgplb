@@ -1,0 +1,24 @@
+# permissions for end users to edit bgpipsconfigs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: bgpipsconfig-editor-role
+rules:
+- apiGroups:
+  - lb.lambdahj.site
+  resources:
+  - bgpipsconfigs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - lb.lambdahj.site
+  resources:
+  - bgpipsconfigs/status
+  verbs:
+  - get

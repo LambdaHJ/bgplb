@@ -1,0 +1,68 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.3.0
+  creationTimestamp: null
+  name: bgpipsconfigs.crd.projectcalico.org
+spec:
+  group: crd.projectcalico.org
+  names:
+    kind: BGPIPsConfig
+    listKind: BGPIPsConfigList
+    plural: bgpipsconfigs
+    singular: bgpipsconfig
+  scope: Namespaced
+  validation:
+    openAPIV3Schema:
+      description: BGPIPsConfig is the Schema for the bgpipsconfigs API
+      properties:
+        apiVersion:
+          description: 'APIVersion defines the versioned schema of this representation
+            of an object. Servers should convert recognized schemas to the latest
+            internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+          type: string
+        kind:
+          description: 'Kind is a string value representing the REST resource this
+            object represents. Servers may infer this from the endpoint the client
+            submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+          type: string
+        metadata:
+          type: object
+        spec:
+          description: BGPIPsConfigSpec defines the desired state of BGPIPsConfig
+          properties:
+            cidr:
+              description: Cidr is IpRange. Edit BGPIPsConfig_types.go to remove/update
+              type: string
+            free:
+              type: integer
+            ipItemList:
+              properties:
+                ips:
+                  items:
+                    type: string
+                  type: array
+              type: object
+            used:
+              type: integer
+          required:
+          - cidr
+          type: object
+        status:
+          description: BGPIPsConfigStatus defines the observed state of BGPIPsConfig
+          type: object
+      type: object
+  version: v1beta1
+  versions:
+  - name: v1beta1
+    served: true
+    storage: true
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
