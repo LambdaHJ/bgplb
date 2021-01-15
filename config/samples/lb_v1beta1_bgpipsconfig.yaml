@@ -1,0 +1,7 @@
+apiVersion: lb.lambdahj.site/v1beta1
+kind: BGPIPsConfig
+metadata:
+  name: bgpipsconfig-sample
+spec:
+  # Add fields here
+  foo: bar

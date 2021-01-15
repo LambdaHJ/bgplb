@@ -1,0 +1,10 @@
+domain: lambdahj.site
+repo: github.com/LambdaHJ/bgplb
+resources:
+- group: lb
+  kind: BGPConfig
+  version: v1beta1
+- group: lb
+  kind: BGPIPsConfig
+  version: v1beta1
+version: "2"
