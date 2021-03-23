@@ -7,7 +7,7 @@ metadata:
   name: manager-role
 rules:
 - apiGroups:
-  - lb.lambdahj.site
+  - ""
   resources:
   - services
   verbs:
@@ -19,10 +19,22 @@ rules:
   - update
   - watch
 - apiGroups:
-  - lb.lambdahj.site
+  - ""
   resources:
   - services/status
   verbs:
   - get
   - patch
   - update
+- apiGroups:
+  - crd.projectcalico.org
+  resources:
+  - bgpconfigurations
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch

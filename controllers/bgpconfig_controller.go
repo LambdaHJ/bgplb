@@ -99,8 +99,9 @@ func (r *BGPConfigReconciler) Init(reader client.Reader) error {
 	return nil
 }
 
-// +kubebuilder:rbac:groups=lb.lambdahj.site,resources=services,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=lb.lambdahj.site,resources=services/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=core,resources=services,verbs=get;list;watch;create;update;patch
+// +kubebuilder:rbac:groups=core,resources=services/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=crd.projectcalico.org,resources=bgpconfigurations,verbs=get;list;watch;create;update;patch;delete
 
 func (r *BGPConfigReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	r.Locker.Lock()
@@ -131,11 +132,11 @@ func (r *BGPConfigReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 
 	if util.NeedToAddFinalizer(svc, finalizer) {
 		controllerutil.AddFinalizer(svc, finalizer)
-		err := r.Update(context.Background(), svc)
-		reqLog.Info("AddFinalizer", "finalizer", svc.Finalizers, "err", err)
-		if err != nil {
-			return ctrl.Result{}, err
-		}
+		// err := r.Update(context.Background(), svc)
+		// reqLog.Info("AddFinalizer", "finalizer", svc.Finalizers, "err", err)
+		// if err != nil {
+		// 	return ctrl.Result{}, err
+		// }
 	}
 
 	if util.IsNeedReleaseIP(svc, false) {
@@ -144,9 +145,9 @@ func (r *BGPConfigReconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 		svc.Status.LoadBalancer.Ingress = nil
 	}
 
-	if !util.IsNeedAssignIP(svc) {
-		return ctrl.Result{}, nil
-	}
+	// if !util.IsNeedAssignIP(svc) {
+	// 	return ctrl.Result{}, nil
+	// }
 
 	var ip string
 	if svc.Spec.LoadBalancerIP != "" {

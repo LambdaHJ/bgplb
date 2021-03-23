@@ -3,7 +3,6 @@ module github.com/LambdaHJ/bgplb
 go 1.13
 
 require (
-	cloud.google.com/go v0.44.3 // indirect
 	github.com/go-logr/logr v0.1.0
 	github.com/golang/groupcache v0.0.0-20190702054246-869f871628b6 // indirect
 	github.com/hashicorp/golang-lru v0.5.3 // indirect
